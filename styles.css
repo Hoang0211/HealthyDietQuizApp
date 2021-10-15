@@ -22,7 +22,7 @@
     color: white;
     font-size: 40px;
 }
-.wrapper{
+.start{
     width: 800px;
     min-height: 500px;
     display: flex;
@@ -33,4 +33,33 @@
     box-shadow: 3px 3px 5px rgb(56, 20, 90);
     background-color: white;
     font-size: 25px;
+}
+.start > img{
+    width: 100%;
+    overflow: hidden;
+}
+.start > .description{
+    position: relative;
+    padding: 30px;
+}
+.start-title{
+    font-size: 35px;
+    font-weight: 700;
+}
+.start-intro-1{
+    margin: 10px 0px;
+    font-size: 20px;
+}
+.start-intro-2{
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 550;
+}
+.start-btn{
+    float: right;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px black;
+    background-color: white;
 }
