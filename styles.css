@@ -3,9 +3,9 @@
     padding: 0;
     font-family: sans-serif;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: auto;
 }
-.quiz-app{
+#quiz-app{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,49 +17,79 @@
         rgba(155, 0, 250, 1) 100%
     );
 }
-.title{
+#title{
     margin-bottom: 20px;
     color: white;
     font-size: 40px;
 }
-.start{
+#wrapper{
     width: 800px;
-    min-height: 500px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     border-radius: 5px;
     box-shadow: 3px 3px 5px rgb(56, 20, 90);
     background-color: white;
     font-size: 25px;
 }
-.start > img{
+#start-container > img{
     width: 100%;
-    overflow: hidden;
 }
-.start > .description{
+#start-container > #description{
     position: relative;
     padding: 30px;
 }
-.start-title{
+#start-title{
     font-size: 35px;
     font-weight: 700;
 }
-.start-intro-1{
+#start-intro-1{
     margin: 10px 0px;
     font-size: 20px;
 }
-.start-intro-2{
+#start-intro-2{
     margin-bottom: 20px;
     font-size: 23px;
     font-weight: 550;
 }
-.start-btn{
+#start-btn{
     float: right;
     padding: 10px 20px;
     font-size: 20px;
     border-radius: 5px;
     box-shadow: 2px 2px 3px black;
     background-color: white;
+    cursor: pointer;
+}
+#quiz-container{
+    width: 100%;
+    padding: 20px;
+}
+#progress{
+    font-size: 20px;
+}
+#question{
+    margin: 20px 0px;
+    font-size: 30px;
+}
+#answers{
+    display: flex;
+    flex-direction: column;
+}
+.answer{
+    margin-top: 5px;
+    padding: 20px;
+    min-height: 60px;
+    text-align: left;
+    font-size: 20px;
+    cursor: pointer;
+}
+#progress-bar{
+    margin-top: 15px;
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
+    background-color: rgb(204, 204, 204);
 }
