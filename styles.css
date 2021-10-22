@@ -93,6 +93,12 @@
     border-radius: 20px;
     background-color: rgb(204, 204, 204);
 }
+#progress-bar-full{
+    height: 30px;
+    width: 0%;
+    background-color: rgb(124, 6, 252);
+
+}
 .hide{
     display: none;
 }
