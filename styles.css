@@ -93,3 +93,6 @@
     border-radius: 20px;
     background-color: rgb(204, 204, 204);
 }
+.hide{
+    display: none;
+}
