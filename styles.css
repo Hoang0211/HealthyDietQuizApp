@@ -94,10 +94,12 @@
     background-color: rgb(204, 204, 204);
 }
 #progress-bar-full{
-    height: 30px;
     width: 0%;
-    background-color: rgb(124, 6, 252);
-
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 3px 3px -5px black;
+    background: linear-gradient(to left, rgb(255, 50, 50), rgb(161, 0, 0));
+    transition: 0.5s ease;
 }
 .hide{
     display: none;

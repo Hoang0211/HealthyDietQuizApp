@@ -134,5 +134,6 @@ const questions = [
             { text: "less than once a week.", points: 2}
         ]
     }                   
+];
 
-]
+export default questions;
