@@ -29,6 +29,8 @@ function startQuiz() {
 }
 
 function nextQuestion() {
+    progressBarFull.setAttribute("data-done", ((currentQuestionId + 1) * 100 / totalQuestions).toString());
+    updateProgressBar();
     resetState();
     showQuestion(shuffledQuestions[currentQuestionId]);
 }
@@ -69,7 +71,9 @@ function resetState() {
     }
 }
 
-//Update progress bar
-//where 3 is current question and 14 is max question amount
-progressBarFull.style.width = `${( 3 / 14 ) * 100 }%`;
+function updateProgressBar() {
+    setTimeout(() => {
+        progressBarFull.style.width = progressBarFull.getAttribute("data-done") + "%";
+    }, 100);
+}
 
