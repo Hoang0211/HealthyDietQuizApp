@@ -33,7 +33,7 @@ function startQuiz() {
     nextQuestion();
 }
 
-function RestartQuiz() {
+function restartQuiz() {
     resultContainer.classList.add("hide");
     quizContainer.classList.remove("hide");
 
