@@ -10,6 +10,7 @@ const progressElement = document.getElementById("progress");
 const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const progressBarFull = document.getElementById("progress-bar-full");
+const scoreElement = document.getElementById("score");
 
 let shuffledQuestions;
 let totalQuestions, currentQuestionId, totalPoint;
@@ -63,6 +64,7 @@ function selectAnswer(e) {
     else {
         console.log("Your total point is: ", totalPoint);
         displayResult();
+        showResult();
     }
 }
 
@@ -81,4 +83,8 @@ function updateProgressBar() {
 function displayResult() {
     quizContainer.classList.add("hide");
     resultContainer.classList.remove("hide");
+}
+
+function showResult() {
+    scoreElement.innerText = "Your score: " + totalPoint + "/37";
 }
