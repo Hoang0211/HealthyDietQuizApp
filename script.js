@@ -4,6 +4,7 @@ const startBtn = document.getElementById("start-btn");
 
 const startContainer = document.getElementById("start-container");
 const quizContainer = document.getElementById("quiz-container");
+const resultContainer = document.getElementById("result-container");
 
 const progressElement = document.getElementById("progress");
 const questionElement = document.getElementById("question");
@@ -61,7 +62,7 @@ function selectAnswer(e) {
     }
     else {
         console.log("Your total point is: ", totalPoint);
-        return;
+        displayResult();
     }
 }
 
@@ -77,3 +78,7 @@ function updateProgressBar() {
     }, 100);
 }
 
+function displayResult() {
+    quizContainer.classList.add("hide");
+    resultContainer.classList.remove("hide");
+}
