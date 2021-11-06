@@ -18,7 +18,7 @@ let shuffledQuestions;
 let totalQuestions, currentQuestionId, totalPoint;
 
 startBtn.addEventListener("click", startQuiz);
-rerunBtn.addEventListener("click", RestartQuiz);
+rerunBtn.addEventListener("click", restartQuiz);
 
 function startQuiz() {
     startContainer.classList.add("hide");
