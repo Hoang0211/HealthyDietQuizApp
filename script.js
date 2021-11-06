@@ -1,6 +1,7 @@
 import questions from "/questions.js";
 
 const startBtn = document.getElementById("start-btn");
+const rerunBtn = document.getElementById("rerun-btn");
 
 const startContainer = document.getElementById("start-container");
 const quizContainer = document.getElementById("quiz-container");
@@ -12,13 +13,28 @@ const answersElement = document.getElementById("answers");
 const progressBarFull = document.getElementById("progress-bar-full");
 const scoreElement = document.getElementById("score");
 
+
 let shuffledQuestions;
 let totalQuestions, currentQuestionId, totalPoint;
 
 startBtn.addEventListener("click", startQuiz);
+rerunBtn.addEventListener("click", RestartQuiz);
 
 function startQuiz() {
     startContainer.classList.add("hide");
+    quizContainer.classList.remove("hide");
+
+    shuffledQuestions = questions.sort((a, b) => 0.5 - Math.random());
+
+    totalQuestions = shuffledQuestions.length;
+    currentQuestionId = 0;
+    totalPoint = 0;
+
+    nextQuestion();
+}
+
+function restartQuiz() {
+    resultContainer.classList.add("hide");
     quizContainer.classList.remove("hide");
 
     shuffledQuestions = questions.sort((a, b) => 0.5 - Math.random());
