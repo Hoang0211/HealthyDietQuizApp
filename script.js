@@ -6,6 +6,7 @@ const rerunBtn = document.getElementById("rerun-btn");
 const startContainer = document.getElementById("start-container");
 const quizContainer = document.getElementById("quiz-container");
 const resultContainer = document.getElementById("result-container");
+const resultContainer3 = document.getElementById("result-container-3");
 
 const progressElement = document.getElementById("progress");
 const questionElement = document.getElementById("question");
@@ -30,6 +31,11 @@ function startQuiz() {
     currentQuestionId = 0;
     totalPoint = 0;
 
+    // Reset show answers panel for new quiz attempt
+    while (resultContainer3.firstChild) {
+        resultContainer3.removeChild(resultContainer3.firstChild);
+    }
+
     nextQuestion();
 }
 
@@ -42,6 +48,11 @@ function restartQuiz() {
     totalQuestions = shuffledQuestions.length;
     currentQuestionId = 0;
     totalPoint = 0;
+
+    // Reset show answers panel for new quiz attempt
+    while (resultContainer3.firstChild) {
+        resultContainer3.removeChild(resultContainer3.firstChild);
+    }
 
     nextQuestion();
 }
@@ -67,6 +78,40 @@ function showQuestion(question) {
         button.addEventListener("click", selectAnswer);
         answersElement.appendChild(button);
     });
+
+    // Below codes serve for show answers phase
+    const resultPanel = document.createElement("div");
+    resultPanel.classList.add("result-panel");
+
+    const progressInResultPanel = document.createElement("div");
+    progressInResultPanel.classList.add("progress");
+
+    const questionInResultPanel = document.createElement("div");
+    questionInResultPanel.classList.add("question");
+
+    progressInResultPanel.innerText = (currentQuestionId + 1).toString() + "/" + totalQuestions.toString();
+    questionInResultPanel.innerText = questionElement.innerText;
+    resultPanel.appendChild(progressInResultPanel);
+    resultPanel.appendChild(questionInResultPanel);
+
+    shuffledAnswers.forEach(answer => {
+        const answerPanel = document.createElement("div");
+        answerPanel.classList.add("answer-panel");
+
+        const answerInAnswerPanel = document.createElement("div");
+        answerInAnswerPanel.classList.add("answer");
+
+        const scoreInAnswerPanel = document.createElement("div");
+        scoreInAnswerPanel.classList.add("score");
+
+        answerInAnswerPanel.innerText = answer.text;
+        scoreInAnswerPanel.innerText = answer.points + " points";
+        answerPanel.appendChild(answerInAnswerPanel);
+        answerPanel.appendChild(scoreInAnswerPanel);
+        resultPanel.appendChild(answerPanel);
+    });
+
+    resultContainer3.appendChild(resultPanel);
 }
 
 function selectAnswer(e) {
@@ -78,12 +123,12 @@ function selectAnswer(e) {
         nextQuestion();
     }
     else {
-        console.log("Your total point is: ", totalPoint);
         displayResult();
         showResult();
     }
 }
 
+// Reset answer panel for new question
 function resetState() {
     while (answersElement.firstChild) {
         answersElement.removeChild(answersElement.firstChild);
