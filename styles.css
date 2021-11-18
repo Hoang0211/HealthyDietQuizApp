@@ -67,18 +67,18 @@
     width: 100%;
     padding: 20px;
 }
-#progress{
+#quiz-container > #progress{
     font-size: 20px;
 }
-#question{
+#quiz-container > #question{
     margin: 20px 0px;
     font-size: 30px;
 }
-#answers{
+#quiz-container > #answers{
     display: flex;
     flex-direction: column;
 }
-.answer{
+#quiz-container .answer{
     margin-top: 5px;
     padding: 20px;
     min-height: 60px;
@@ -127,7 +127,7 @@
     font-weight: 700;
     font-size: 23px;
 }
-#score{
+#score-container > #score{
     margin: 15px 0px;
     font-weight: 700;
     font-size: 26px;
@@ -166,7 +166,7 @@ li{
     cursor: pointer;
 }
 #divider{
-    margin: 0px 20px;
+    margin: 0px 60px;
     border: 2px solid grey;
     border-radius: 1px;
     background-color: grey;
@@ -174,7 +174,37 @@ li{
 #result-container-3{
     width: 100%;
     min-height: 400px;
+    padding: 20px 60px;
 }
+#result-panel{
+    margin-bottom: 10px;
+    position: relative;
+}
+#result-panel > #progress{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-weight: 600;
+    font-size: 23px;
+}
+#result-panel > #question{
+    margin-bottom: 10px;
+    padding-left: 60px;
+    font-weight: 600;
+    font-size: 23px;
+}
+#result-panel > #answer-panel{
+    margin-bottom: 10px;
+    padding-left: 60px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    color: rgb(128, 128, 128);
+}
+#answer-panel > #answer{
+    max-width: 540px;
+}
+
 .hide{
     display: none;
 }
