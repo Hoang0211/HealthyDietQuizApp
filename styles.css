@@ -18,7 +18,7 @@
     );
 }
 #title{
-    margin: 20px 0px;
+    margin-top: 20px;
     color: white;
     font-size: 40px;
 }
@@ -99,7 +99,7 @@
     height: 100%;
     border-radius: 20px;
     box-shadow: 0 3px 3px -5px black;
-    background: linear-gradient(to left, rgb(255, 50, 50), rgb(161, 0, 0));
+    background: linear-gradient(to left, rgb(0, 4, 255), rgb(124, 88, 255));
     transition: 0.5s ease;
 }
 #result-container{
