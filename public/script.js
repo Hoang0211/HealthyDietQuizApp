@@ -1,16 +1,16 @@
 import questions from "/questions.js";
 
 const startBtn = document.getElementById("start-btn");
-const rerunBtn = document.getElementById("rerun-btn");
+const rerunBtn = document.getElementById("restart-btn");
 
 const startContainer = document.getElementById("start-container");
 const quizContainer = document.getElementById("quiz-container");
 const resultContainer = document.getElementById("result-container");
-const resultContainer3 = document.getElementById("result-container-3");
+const answersContainer = document.getElementById("answers-container");
 
 const progressElement = document.getElementById("progress");
 const questionElement = document.getElementById("question");
-const answersElement = document.getElementById("answers");
+const optionsElement = document.getElementById("options-container");
 const progressBarFull = document.getElementById("progress-bar-full");
 const scoreElement = document.getElementById("score");
 
@@ -31,11 +31,7 @@ function startQuiz() {
     currentQuestionId = 0;
     totalPoint = 0;
 
-    // Reset show answers panel for new quiz attempt
-    while (resultContainer3.firstChild) {
-        resultContainer3.removeChild(resultContainer3.firstChild);
-    }
-
+    resetAnswersContainer();
     nextQuestion();
 }
 
@@ -49,74 +45,39 @@ function restartQuiz() {
     currentQuestionId = 0;
     totalPoint = 0;
 
-    // Reset show answers panel for new quiz attempt
-    while (resultContainer3.firstChild) {
-        resultContainer3.removeChild(resultContainer3.firstChild);
-    }
-
+    resetAnswersContainer();
     nextQuestion();
 }
 
 function nextQuestion() {
     progressBarFull.setAttribute("data-done", ((currentQuestionId + 1) * 100 / totalQuestions).toString());
     updateProgressBar();
-    resetState();
+    resetOptions();
     showQuestion(shuffledQuestions[currentQuestionId]);
 }
 
 function showQuestion(question) {
-    progressElement.innerText = "Question " + (currentQuestionId + 1).toString() + "/" + totalQuestions.toString() + ":";
+    let progress = (currentQuestionId + 1).toString() + "/" + totalQuestions.toString();
+    progressElement.innerText = "Question " + progress + ":";
     questionElement.innerText = question.question;
 
-    let shuffledAnswers = question.answers.sort((a, b) => 0.5 - Math.random());
+    let shuffledOptions = question.options.sort((a, b) => 0.5 - Math.random());
 
-    shuffledAnswers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerText = answer.text;
-        button.classList.add("answer");
-        button.dataset.points = answer.points;
-        button.addEventListener("click", selectAnswer);
-        answersElement.appendChild(button);
+    shuffledOptions.forEach(option => {
+        const optionElement = document.createElement("button");
+        optionElement.innerText = option.text;
+        optionElement.classList.add("option");
+        optionElement.dataset.points = option.points;
+        optionElement.addEventListener("click", selectOption);
+        optionsElement.appendChild(optionElement);
     });
 
-    // Below codes serve for show answers phase
-    const resultPanel = document.createElement("div");
-    resultPanel.classList.add("result-panel");
-
-    const progressInResultPanel = document.createElement("div");
-    progressInResultPanel.classList.add("progress");
-
-    const questionInResultPanel = document.createElement("div");
-    questionInResultPanel.classList.add("question");
-
-    progressInResultPanel.innerText = (currentQuestionId + 1).toString() + "/" + totalQuestions.toString();
-    questionInResultPanel.innerText = questionElement.innerText;
-    resultPanel.appendChild(progressInResultPanel);
-    resultPanel.appendChild(questionInResultPanel);
-
-    shuffledAnswers.forEach(answer => {
-        const answerPanel = document.createElement("div");
-        answerPanel.classList.add("answer-panel");
-
-        const answerInAnswerPanel = document.createElement("div");
-        answerInAnswerPanel.classList.add("answer");
-
-        const scoreInAnswerPanel = document.createElement("div");
-        scoreInAnswerPanel.classList.add("score");
-
-        answerInAnswerPanel.innerText = answer.text;
-        scoreInAnswerPanel.innerText = answer.points + " points";
-        answerPanel.appendChild(answerInAnswerPanel);
-        answerPanel.appendChild(scoreInAnswerPanel);
-        resultPanel.appendChild(answerPanel);
-    });
-
-    resultContainer3.appendChild(resultPanel);
+    updateAnswers(progress, questionElement.innerText, shuffledOptions);
 }
 
-function selectAnswer(e) {
-    const selectedAnswer = e.target;
-    const pointGained = selectedAnswer.dataset.points;
+function selectOption(e) {
+    const selectedOption = e.target;
+    const pointGained = selectedOption.dataset.points;
     totalPoint += parseInt(pointGained);
     if (currentQuestionId + 1 < totalQuestions) {
         currentQuestionId++;
@@ -124,14 +85,19 @@ function selectAnswer(e) {
     }
     else {
         displayResult();
-        showResult();
+        showScore();
     }
 }
 
-// Reset answer panel for new question
-function resetState() {
-    while (answersElement.firstChild) {
-        answersElement.removeChild(answersElement.firstChild);
+function resetOptions() {
+    while (optionsElement.firstChild) {
+        optionsElement.removeChild(optionsElement.firstChild);
+    }
+}
+
+function resetAnswersContainer() {
+    while (answersContainer.firstChild) {
+        answersContainer.removeChild(answersContainer.firstChild);
     }
 }
 
@@ -146,6 +112,45 @@ function displayResult() {
     resultContainer.classList.remove("hide");
 }
 
-function showResult() {
+function showScore() {
     scoreElement.innerText = "Your score: " + totalPoint + "/37";
+}
+
+function updateAnswers(progress, question, options) {
+    const answerContainer = document.createElement("div");
+    answerContainer.classList.add("answer-container");
+
+    const answerContainerProgress = document.createElement("p");
+    answerContainerProgress.classList.add("progress");
+
+    const answerContainerQuestion = document.createElement("p");
+    answerContainerQuestion.classList.add("question");
+
+    const answerContainerOptions = document.createElement("div");
+    answerContainerOptions.classList.add("options");
+
+    answerContainerProgress.innerText = progress;
+    answerContainerQuestion.innerText = question;
+    answerContainer.appendChild(answerContainerProgress);
+    answerContainer.appendChild(answerContainerQuestion);
+    answerContainer.appendChild(answerContainerOptions);
+
+    options.forEach(option => {
+        const optionElem = document.createElement("div");
+        optionElem.classList.add("option");
+
+        const optionElemAnswer = document.createElement("p");
+        optionElemAnswer.classList.add("answer");
+
+        const optionElemScore = document.createElement("p");
+        optionElemScore.classList.add("score");
+
+        optionElemAnswer.innerText = option.text;
+        optionElemScore.innerText = option.points + " points";
+        optionElem.appendChild(optionElemAnswer);
+        optionElem.appendChild(optionElemScore);
+        answerContainerOptions.appendChild(optionElem);
+    });
+
+    answersContainer.appendChild(answerContainer);
 }
